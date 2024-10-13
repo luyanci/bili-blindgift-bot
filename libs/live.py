@@ -32,6 +32,7 @@ def get_room_owner_uid():
     return owner_uid
 
 async def _send_it(text:str):
+    logger.info(f"sending:{text}")
     failed=False
     sleep(random.random()+0.2)  #预防api返回 10030/10031（您发送弹幕的频率过快)
     try:
