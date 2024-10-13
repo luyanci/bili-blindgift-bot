@@ -23,7 +23,7 @@ def listen():
     @live.LiveDanma.on("SEND_GIFT")
     async def events(event:str):
         if blind.check_blind(event) is True:
-            await blind.on_blind(event)
+            blind.on_blind(event)
         else:
             return
     
