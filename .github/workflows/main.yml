@@ -12,6 +12,7 @@ jobs:
             fail-fast: false
             matrix:
                 os: [macos-latest,ubuntu-latest,windows-latest,macos-13]
+                arch:[x86,x64,arm64]
         runs-on: ${{matrix.os}}
         steps:
         - uses: actions/checkout@v4
@@ -19,6 +20,7 @@ jobs:
           uses: actions/setup-python@v5
           with:
             python-version: 3.9
+            architecture: ${{matrix.arch}}
             cache: 'pip' 
             cache-dependency-path: '**/requirements.txt'
         - name: Cache apt dependencies(for linux)
@@ -32,9 +34,9 @@ jobs:
         - name: Build
           run: pyinstaller -F --hidden-import=PIL._tkinter_finder --additional-hooks-dir=hooks main.py -n blind-bot -i .res/icon.ico
         - name: pack
-          run: 7z a -tzip vcbots-bili-${{runner.os}}-${{runner.arch}}.zip ./dist
+          run: 7z a -tzip vcbots-bili-${{runner.os}}-${{matrix.arch}}.zip ./dist
         - name: Upload
           uses: actions/upload-artifact@v4
           with: 
-            name: build-${{matrix.os}}
-            path: ./vcbots-bili-${{runner.os}}-${{runner.arch}}.zip
+            name: build-${{matrix.os}}-${{matrix.arch}}
+            path: ./vcbots-bili-${{runner.os}}-${{matrix.arch}}.zip
