@@ -11,7 +11,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                os: [macos-latest,ubuntu-2404,windows-latest,]
+                os: [macos-latest,ubuntu-24.04,windows-latest,macos-13]
                 arch: [x86,x64,arm64]
         runs-on: ${{matrix.os}}
         steps:
