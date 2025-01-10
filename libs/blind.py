@@ -25,7 +25,7 @@ def _check_total(total:int):
     elif total < 0: 
         return f'亏{abs(total):0.1f}元'
     else:
-        return ''
+        return '不赚不亏（？'
 
 def check_blind(event:str):
     try:
