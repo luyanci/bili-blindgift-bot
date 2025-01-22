@@ -6,6 +6,8 @@ from libs import config
 from libs import live,user
 from libs import blind,gift,data
 
+data.init()
+
 def listen():
     live.set(config.room,user.c)
     
