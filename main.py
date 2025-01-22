@@ -2,10 +2,9 @@ import os
 import datetime
 from loguru import logger
 from bilibili_api import sync
-
 from libs import config
 from libs import live,user
-from libs import blind
+from libs import blind,gift,data
 
 def listen():
     live.set(config.room,user.c)
@@ -18,13 +17,20 @@ def listen():
         logger.debug(event)
         return
     
-    
+    @live.LiveDanma.on('GUARD_BUY')
+    async def on_guard_buy(event:str):
+        gift.get_danmaku_on_buyguard(event)
+        return
     
     @live.LiveDanma.on("SEND_GIFT")
     async def events(event:str):
-        if blind.check_blind(event) is True:
+        if blind.check_blind(event):
             blind.on_blind(event)
+            data.save_for_blind_gift(event)
+            return
         else:
+            gift.get_danmaku_on_gift(event)
+            data.save(event)
             return
     
     try:
@@ -32,7 +38,7 @@ def listen():
     finally:
         os._exit(0)
     
-    
+
 @logger.catch
 def main():
     today=datetime.date.today()

@@ -19,16 +19,11 @@ default={
                 'followed': '感谢 {user} 的关注喵～'
                 }, 
             'command': {
-                '骂我':'杂鱼～杂鱼～'
-                }
-            },
-        '282873551': {
-            'command': {
-                'debug': 'vcbot-bili with default rule'
+                'ping':'pong'
                 }
             }
         }
-    }
+}
 
 def loadroomcfg():
     if not os.path.exists("./.env"):
