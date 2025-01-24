@@ -22,7 +22,7 @@ def init():
             writer=csv.writer(f)
             writer.writerow(header_blind)
     
-def save(data:dict):
+async def save(data:dict):
     data=data['data']['data']
     today=datetime.date.today()
     timestamp=datetime.datetime.fromtimestamp(data['timestamp'])
@@ -31,7 +31,7 @@ def save(data:dict):
         writer=csv.writer(f)
         writer.writerow([timestamp,data['uid'],data['uname'],data['giftName'],data['num'],f"{int(data['price'])/1000}元"])
 
-def save_for_blind_gift(data:dict):
+async def save_for_blind_gift(data:dict):
     data=data['data']['data']
     blind=data['blind_gift']
     logger.info(blind)

@@ -28,11 +28,11 @@ def listen():
     async def events(event:str):
         if blind.check_blind(event):
             blind.on_blind(event)
-            data.save_for_blind_gift(event)
+            await data.save_for_blind_gift(event)
             return
         else:
             gift.get_danmaku_on_gift(event)
-            data.save(event)
+            await data.save(event)
             return
     
     try:
