@@ -1,5 +1,5 @@
 loguru==0.7.3
 pyinstaller==6.11.1
 python-dotenv==1.0.1
-bilibili-api-python==17.0.0
+bilibili-api-python==17.1.0
 aiohttp==3.9.0
