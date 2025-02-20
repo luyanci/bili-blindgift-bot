@@ -1,16 +1,17 @@
 import os
 import json
 from loguru import logger
-from bilibili_api import Credential,login,user,sync
+from bilibili_api import Credential,user,sync
+from blapi_port import login_port
 from . import config
 
 def _user_login():
     import tkinter as tk
-    a = login.login_with_qrcode(tk.Tk())
+    a = login_port.login_with_qrcode(tk.Tk())
     return a
 
 def _user_login_term():
-    a = login.login_with_qrcode_term()
+    a = login_port.login_with_qrcode_term()
     return a
 
 async def user_info(uid:int,Credential: Credential):
